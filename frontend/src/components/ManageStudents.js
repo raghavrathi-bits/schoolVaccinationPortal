@@ -70,8 +70,6 @@ const ManageStudents = () => {
   };
 
   const handleEdit = (student) => {
-    console.log(student);
-    console.log(student.std_id);
     setFormData(student);
     setIsEditing(true);
     setEditingId(student.std_id);
@@ -112,7 +110,7 @@ const ManageStudents = () => {
               <input
                 type="text"
                 id="name"
-                name="name"
+                name="student_name"
                 value={formData.student_name}
                 onChange={handleInputChange}
                 required
