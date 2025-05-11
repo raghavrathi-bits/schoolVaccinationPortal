@@ -1,0 +1,45 @@
+.vaccine-selector {
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.vaccine-selector label {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.vaccine-select {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: white;
+  min-width: 200px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.vaccine-select:hover {
+  border-color: #4a90e2;
+}
+
+.vaccine-select:focus {
+  outline: none;
+  border-color: #4a90e2;
+  box-shadow: 0 0 5px rgba(74, 144, 226, 0.2);
+}
+
+@media (max-width: 768px) {
+  .vaccine-selector {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .vaccine-select {
+    width: 100%;
+  }
+} 

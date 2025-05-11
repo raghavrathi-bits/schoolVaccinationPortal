@@ -1,0 +1,31 @@
+.report-container {
+    display: flex;
+    min-height: 100vh;
+    background-color: #d8e1e8;
+    transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .report-section {
+    flex: 1;
+    padding: 2rem;
+    max-width: 1200px;
+    margin-left: 285px;
+    margin-right: 50px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    width: 100%;
+  }
+  
+  .report-section h2 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-size: 2.5rem;
+    transition: all 0.3s ease;
+  }
+
+  .report-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }

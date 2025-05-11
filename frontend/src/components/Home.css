@@ -1,0 +1,139 @@
+.dashboard-container {
+  display: flex;
+  min-height: 100vh;
+  background-color: #d8e1e8;
+  transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dashboard-section {
+  flex: 1;
+  padding: 2rem;
+  max-width: 1200px;
+  margin-left: 50px;
+  margin-right: 50px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 100%;
+}
+
+.dashboard-section h2 {
+  color: #333;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 2.5rem;
+  transition: all 0.3s ease;
+}
+
+.dashboard-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.stat-number {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #4a90e2;
+  margin: 0;
+  transition: color 0.3s ease;
+}
+
+.stat-percentage {
+  color: #28a745;
+  font-weight: 500;
+  margin: 0.5rem 0 0;
+  transition: color 0.3s ease;
+}
+
+.upcoming-drives h3 {
+  color: #666;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.drives-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+}
+
+.drive-card {
+  background: white;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-left: 4px solid #4a90e2;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.drive-card:hover {
+  transform: translateX(5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.drive-date {
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.drive-vaccine {
+  color: #4a90e2;
+  margin-bottom: 0.25rem;
+}
+
+.drive-location {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.vaccine-selector {
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.vaccine-selector label {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.vaccine-select {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: white;
+  min-width: 200px;
+  cursor: pointer;
+}
+
+.vaccine-select:focus {
+  outline: none;
+  border-color: #4a90e2;
+  box-shadow: 0 0 5px rgba(74, 144, 226, 0.2);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .dashboard-section {
+    margin-left: 0;
+    padding: 1rem;
+    width: 100%;
+  }
+
+  .menu-section.collapsed + .dashboard-section {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .dashboard-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .drives-list {
+    grid-template-columns: 1fr;
+  }
+} 
