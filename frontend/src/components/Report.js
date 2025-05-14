@@ -12,7 +12,6 @@ const Report = () => {
   const [selectStatus, setSelectStatus] = useState('All');
   const [vaccines, setVaccines] = useState([]);
   const [students, setStudents] = useState([]);
-  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     document.title = 'Vaccination Portal - Reports';
@@ -21,19 +20,21 @@ const Report = () => {
     fetchVaccines();
     fetchRegisteredVaccinatedStudents(selectedVaccine);
   }, [selectedVaccine]);
- 
-  const handleVaccineChange = (e) => {
+
+  const handleVaccineChange = e => {
     setSelectedVaccine(e.target.value);
   };
 
-  const handleStatusChange = (e) => {
+  const handleStatusChange = e => {
     setSelectStatus(e.target.value);
   };
 
   const fetchVaccines = async () => {
     try {
       const response = await api.getVaccines();
-      const vaccineList = response.vaccine.map(vaccine => vaccine.vaccination_name);
+      const vaccineList = response.vaccine.map(
+        vaccine => vaccine.vaccination_name
+      );
       setVaccines(vaccineList);
       if (!selectedVaccine && vaccineList.length > 0) {
         setSelectedVaccine(vaccineList[0]);
@@ -44,10 +45,10 @@ const Report = () => {
     }
   };
 
-  const fetchRegisteredVaccinatedStudents = async (vaccineName) => {
+  const fetchRegisteredVaccinatedStudents = async vaccineName => {
     try {
       const response = await api.getStudentsRegisterOrVaccinated(vaccineName);
-      console.log("11")
+      console.log('11');
       console.log(response.students);
       setStudents(response.students || []);
     } catch (error) {
@@ -56,7 +57,7 @@ const Report = () => {
     }
   };
 
-  const fetchRegisteredStudents = async (vaccineName) => {
+  const fetchRegisteredStudents = async vaccineName => {
     try {
       const response = await api.getRegisteredStudentsForVaccine(vaccineName);
       setRegisteredStudents(response.students || []);
@@ -66,7 +67,7 @@ const Report = () => {
     }
   };
 
-  const fetchVaccinatedStudents = async (vaccineName) => {
+  const fetchVaccinatedStudents = async vaccineName => {
     try {
       const response = await api.getVaccinatedStudentsForVaccine(vaccineName);
       setVaccinatedStudents(response.students || []);
@@ -78,26 +79,28 @@ const Report = () => {
 
   const registeredCount = registeredStudents.length;
   const vaccinatedCount = vaccinatedStudents.length;
-  const vaccinationPercentage = Math.round((vaccinatedCount / registeredCount) * 100);
+  const vaccinationPercentage = Math.round(
+    (vaccinatedCount / registeredCount) * 100
+  );
 
-      const filteredStudents = students.filter(student => {
-        if (!student) return false;
-        if(selectStatus == 'All') return student;
-        const searchValue = selectStatus;
-        return student.status?.includes(searchValue);
-      });
+  const filteredStudents = students.filter(student => {
+    if (!student) return false;
+    if (selectStatus === 'All') return student;
+    const searchValue = selectStatus;
+    return student.status?.includes(searchValue);
+  });
 
   return (
     <div className="report-container">
-      <Menu/>
+      <Menu />
       <div className="report-section">
-          <h2>Reports</h2>
-          <VaccineSelector 
+        <h2>Reports</h2>
+        <VaccineSelector
           vaccines={vaccines}
           selectedVaccine={selectedVaccine}
           onVaccineChange={handleVaccineChange}
         />
-         <div className="report-cards">
+        <div className="report-cards">
           <DashboardCard
             title={`Total Students registered for ${selectedVaccine}`}
             value={registeredCount}
@@ -110,62 +113,55 @@ const Report = () => {
             icon="💉"
           />
         </div>
-        
-        <DashboardPieChart 
+
+        <DashboardPieChart
           registeredCount={registeredCount}
           vaccinatedCount={vaccinatedCount}
           vaccineName={selectedVaccine}
         />
 
-      <div className="vaccine-status-section">
-        <label htmlFor="vaccine-status">Vaccination Status:</label>
-        <select 
-          id="vaccine-status" 
-          value={selectStatus}
-          onChange={handleStatusChange}
-          className="vaccine-select"
-        >
-          <option value="All">Select Status</option>
-          <option value="Vaccinated">Vaccinated</option>
-          <option value="Registered">Registered</option>
-        
-        </select>
-      </div>
-    
-      <div className="students-list">
-              <h2>Students List ({selectedVaccine})</h2>
-              {filteredStudents.length === 0 ? (
-                <div className="no-results-message">
-                  {searchTerm ? 'No students found matching your search criteria.' : 'No students found.'}
-                </div>
-              ) : (
-                <table className="students-table">
-                  <thead>
-                    <tr role='row'>
-                      <th role='columnheader'>Name</th>
-                      <th role='columnheader'>Vaccination Date</th>
-                      <th role='columnheader'>Gender</th>
-                      <th role='columnheader'>Age</th>
-                      <th role='columnheader'>Status</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {filteredStudents.map(student => (
-                      <tr key={student.std_id} role='row'>
-                        <td role='cell'>{student.student_name || 'N/A'}</td>
-                        <td role='cell'>{student.vaccination_date || 'N/A'}</td>
-                        <td role='cell'>{student.gender || 'N/A'}</td>
-                        <td role='cell'>{student.age || 'N/A'}</td>
-                        <td role='cell'>{student.status || 'N/A'}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              )}
-            </div>
+        <div className="vaccine-status-section">
+          <label htmlFor="vaccine-status">Vaccination Status:</label>
+          <select
+            id="vaccine-status"
+            value={selectStatus}
+            onChange={handleStatusChange}
+            className="vaccine-select"
+          >
+            <option value="All">Select Status</option>
+            <option value="Vaccinated">Vaccinated</option>
+            <option value="Registered">Registered</option>
+          </select>
+        </div>
+
+        <div className="students-list">
+          <h2>Students List ({selectedVaccine})</h2>
+          <table className="students-table">
+            <thead>
+              <tr role="row">
+                <th role="columnheader">Name</th>
+                <th role="columnheader">Vaccination Date</th>
+                <th role="columnheader">Gender</th>
+                <th role="columnheader">Age</th>
+                <th role="columnheader">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filteredStudents.map(student => (
+                <tr key={student.std_id} role="row">
+                  <td role="cell">{student.student_name || 'N/A'}</td>
+                  <td role="cell">{student.vaccination_date || 'N/A'}</td>
+                  <td role="cell">{student.gender || 'N/A'}</td>
+                  <td role="cell">{student.age || 'N/A'}</td>
+                  <td role="cell">{student.status || 'N/A'}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
+    </div>
   );
 };
 
-export default Report; 
+export default Report;

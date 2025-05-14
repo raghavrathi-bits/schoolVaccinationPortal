@@ -17,11 +17,10 @@ const Dashboard = () => {
     fetchVaccinatedStudents(selectedVaccine);
   }, []);
 
-
   const fetchRegisteredStudents = async () => {
     try {
       const response = await api.getRegisteredStudentsForVaccine('All');
-      console.log("Registered students:", response.students);
+      console.log('Registered students:', response.students);
       setRegisteredStudents(response.students || []);
     } catch (error) {
       console.error('Error fetching registered students:', error);
@@ -32,7 +31,7 @@ const Dashboard = () => {
   const fetchVaccinatedStudents = async () => {
     try {
       const response = await api.getVaccinatedStudentsForVaccine('All');
-      console.log("Vaccinated students:", response.students);
+      console.log('Vaccinated students:', response.students);
       setVaccinatedStudents(response.students || []);
     } catch (error) {
       console.error('Error fetching vaccinated students:', error);
@@ -42,7 +41,9 @@ const Dashboard = () => {
   // Calculate statistics
   const registeredCount = registeredStudents.length;
   const vaccinatedCount = vaccinatedStudents.length;
-  const vaccinationPercentage = Math.round((vaccinatedCount / registeredCount) * 100);
+  const vaccinationPercentage = Math.round(
+    (vaccinatedCount / registeredCount) * 100
+  );
 
   return (
     <div className="dashboard-container">
@@ -62,7 +63,7 @@ const Dashboard = () => {
             icon="💉"
           />
         </div>
-        
+
         <div className="upcoming-drives">
           <h3>Upcoming Vaccination Drives</h3>
           <div className="drives-list">
@@ -78,4 +79,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard; 
+export default Dashboard;

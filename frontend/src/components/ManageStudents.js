@@ -14,7 +14,7 @@ const ManageStudents = () => {
     student_name: '',
     grade: '',
     age: '',
-    gender: ''
+    gender: '',
   });
   const [message, setMessage] = useState([]);
 
@@ -34,15 +34,15 @@ const ManageStudents = () => {
     }
   };
 
-  const handleInputChange = (e) => {
+  const handleInputChange = e => {
     const { name, value } = e.target;
     setFormData(prevState => ({
       ...prevState,
-      [name]: value
+      [name]: value,
     }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault();
     try {
       if (isEditing) {
@@ -62,20 +62,20 @@ const ManageStudents = () => {
         student_name: '',
         grade: '',
         age: '',
-        gender: ''
+        gender: '',
       });
     } catch (error) {
       console.error('Error saving student:', error);
     }
   };
 
-  const handleEdit = (student) => {
+  const handleEdit = student => {
     setFormData(student);
     setIsEditing(true);
     setEditingId(student.std_id);
   };
 
-  const handleDelete = async (id) => {
+  const handleDelete = async id => {
     try {
       await api.deleteStudent(id);
       await fetchStudents();
@@ -100,8 +100,8 @@ const ManageStudents = () => {
   return (
     <div className="manage-students-container">
       <Menu />
-      <div className="content-section">
-        <div className="form-section">
+      <div className="student-section">
+        <div className="student-form-section">
           <h2>{isEditing ? 'Edit Student' : 'Add New Student'}</h2>
           <div>{message}</div>
           <form onSubmit={handleSubmit}>
@@ -158,8 +158,8 @@ const ManageStudents = () => {
                 {isEditing ? 'Update Student' : 'Add Student'}
               </button>
               {isEditing && (
-                <button 
-                  type="button" 
+                <button
+                  type="button"
                   className="cancel-button"
                   onClick={() => {
                     setIsEditing(false);
@@ -168,7 +168,7 @@ const ManageStudents = () => {
                       student_name: '',
                       grade: '',
                       age: '',
-                      gender:''
+                      gender: '',
                     });
                   }}
                 >
@@ -179,12 +179,12 @@ const ManageStudents = () => {
           </form>
         </div>
 
-        <div className="search-section">
+        <div className="student-search-section">
           <h2>Search Students</h2>
           <div className="search-controls">
-            <select 
-              value={searchBy} 
-              onChange={(e) => setSearchBy(e.target.value)}
+            <select
+              value={searchBy}
+              onChange={e => setSearchBy(e.target.value)}
               className="search-select"
             >
               <option value="name">Name</option>
@@ -194,7 +194,7 @@ const ManageStudents = () => {
               type="text"
               placeholder={`Search by ${searchBy}...`}
               value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
+              onChange={e => setSearchTerm(e.target.value)}
               className="search-input"
             />
           </div>
@@ -204,34 +204,36 @@ const ManageStudents = () => {
           <h2>Students List</h2>
           {filteredStudents.length === 0 ? (
             <div className="no-results-message">
-              {searchTerm ? 'No students found matching your search criteria.' : 'No students found.'}
+              {searchTerm
+                ? 'No students found matching your search criteria.'
+                : 'No students found.'}
             </div>
           ) : (
             <table className="students-table">
               <thead>
-                <tr role='row'>
-                  <th role='columnheader'>Name</th>
-                  <th role='columnheader'>Grade</th>
-                  <th role='columnheader'>Gender</th>
-                  <th role='columnheader'>Age</th>
-                  <th role='columnheader'>Actions</th>
+                <tr role="row">
+                  <th role="columnheader">Name</th>
+                  <th role="columnheader">Grade</th>
+                  <th role="columnheader">Gender</th>
+                  <th role="columnheader">Age</th>
+                  <th role="columnheader">Actions</th>
                 </tr>
               </thead>
               <tbody>
                 {filteredStudents.map(student => (
-                  <tr key={student.std_id} role='row'>
-                    <td role='cell'>{student.student_name || 'N/A'}</td>
-                    <td role='cell'>{student.grade || 'N/A'}</td>
-                    <td role='cell'>{student.gender || 'N/A'}</td>
-                    <td role='cell'>{student.age || 'N/A'}</td>
-                    <td role='cell'>
-                      <button 
+                  <tr key={student.std_id} role="row">
+                    <td role="cell">{student.student_name || 'N/A'}</td>
+                    <td role="cell">{student.grade || 'N/A'}</td>
+                    <td role="cell">{student.gender || 'N/A'}</td>
+                    <td role="cell">{student.age || 'N/A'}</td>
+                    <td role="cell">
+                      <button
                         className="edit-button"
                         onClick={() => handleEdit(student)}
                       >
                         Edit
                       </button>
-                      <button 
+                      <button
                         className="delete-button"
                         onClick={() => handleDelete(student.std_id)}
                       >
@@ -249,4 +251,4 @@ const ManageStudents = () => {
   );
 };
 
-export default ManageStudents; 
+export default ManageStudents;

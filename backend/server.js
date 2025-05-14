@@ -5,6 +5,7 @@ const db = require('./config/db');
 const authController = require('./controllers/authController');
 const studentController = require('./controllers/studentController');
 const vaccineController = require('./controllers/vaccineController');
+const driveController = require('./controllers/driveController');
 const app = express();
 
 // Middleware
@@ -20,7 +21,8 @@ app.post('/api/students', studentController.addStudent);
 app.put('/api/students/:id', studentController.updateStudent)
 app.post('/api/registeredStudents', studentController.getRegisteredStudentForVaccine);
 app.post('/api/vaccinatedStudents', studentController.getVaccinatedStudentForVaccine);
-app.get('/api/vaccines', vaccineController.getAllVaccine)
+app.get('/api/vaccines', vaccineController.getAllVaccine);
+app.post('/api/drive', driveController.addVaccineDrive)
 
 
 app.get('/api/version', async (req, res) => {
@@ -30,12 +32,6 @@ app.get('/api/version', async (req, res) => {
       timestamp: new Date().toISOString()
     });
 });
-
-// // Error handling middleware
-// app.use((err, req, res, next) => {
-//   console.error(err.stack);
-//   res.status(500).json({ error: 'Something went wrong!' });
-// });
 
 const PORT = process.env.PORT || 5000;
 

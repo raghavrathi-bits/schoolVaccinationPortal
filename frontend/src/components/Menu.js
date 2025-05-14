@@ -10,7 +10,7 @@ const Menu = () => {
     { path: '/dashboard', label: 'Dashboard' },
     { path: '/manageStudents', label: 'Add/Manage Students' },
     { path: '/manageDrives', label: 'Manage Drives' },
-    { path: '/reports', label: 'Reports' }
+    { path: '/reports', label: 'Reports' },
   ];
 
   return (
@@ -19,7 +19,7 @@ const Menu = () => {
         <h2>Navigate</h2>
       </div>
       <div className="menu-buttons" role="group">
-        {menuItems.map((item) => (
+        {menuItems.map(item => (
           <div
             key={item.path}
             role="button"
@@ -35,4 +35,4 @@ const Menu = () => {
   );
 };
 
-export default Menu; 
+export default Menu;

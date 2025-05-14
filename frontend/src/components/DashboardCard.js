@@ -18,7 +18,11 @@ const DashboardCard = ({ title, value, percentage, icon }) => {
   );
 };
 
-const DashboardPieChart = ({vaccineName, registeredCount, vaccinatedCount }) => {
+const DashboardPieChart = ({
+  vaccineName,
+  registeredCount,
+  vaccinatedCount,
+}) => {
   const chartData = {
     title: `Vaccination Status for ${vaccineName}`,
     labels: ['Vaccinated', 'Not Vaccinated'],
@@ -35,16 +39,16 @@ const DashboardPieChart = ({vaccineName, registeredCount, vaccinatedCount }) => 
     plugins: {
       legend: {
         position: 'bottom',
-      }
+      },
     },
   };
 
   return (
     <div className="chart-container">
-        <h2>{chartData.title}</h2>
+      <h2>{chartData.title}</h2>
       <Pie data={chartData} options={options} />
     </div>
   );
 };
 
-export { DashboardCard, DashboardPieChart }; 
+export { DashboardCard, DashboardPieChart };

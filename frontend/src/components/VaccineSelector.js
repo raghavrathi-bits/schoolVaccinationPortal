@@ -4,14 +4,14 @@ import './VaccineSelector.css';
 const VaccineSelector = ({ vaccines, selectedVaccine, onVaccineChange }) => {
   return (
     <div className="vaccine-selector">
-      <label htmlFor="vaccine-select">Select Vaccine:</label>
-      <select 
-        id="vaccine-select" 
-        value={selectedVaccine} 
+      <label htmlFor="vaccine-select">Select Vaccine</label>
+      <select
+        id="vaccine-select"
+        value={selectedVaccine}
         onChange={onVaccineChange}
         className="vaccine-select"
       >
-        {vaccines.map((vaccine) => (
+        {vaccines.map(vaccine => (
           <option key={vaccine} value={vaccine}>
             {vaccine}
           </option>
@@ -21,4 +21,4 @@ const VaccineSelector = ({ vaccines, selectedVaccine, onVaccineChange }) => {
   );
 };
 
-export default VaccineSelector; 
+export default VaccineSelector;

@@ -7,21 +7,21 @@ const Login = ({ onLogin }) => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username: '',
-    password: ''
+    password: '',
   });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const handleInputChange = (e) => {
+  const handleInputChange = e => {
     const { name, value } = e.target;
     setFormData(prevState => ({
       ...prevState,
-      [name]: value
+      [name]: value,
     }));
     if (error) setError('');
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault();
     setLoading(true);
     setError('');
@@ -30,15 +30,15 @@ const Login = ({ onLogin }) => {
       const response = await api.login(formData.username, formData.password);
       console.log(formData.username);
       console.log(response.status);
-      if(response.status === 200){
+      if (response.status === 200) {
         localStorage.setItem('user', JSON.stringify(response.user));
         // Navigate to dashboard
         navigate('/dashboard');
-      }else if(response.status === 401){
+      } else if (response.status === 401) {
         setError('Invalid username or password');
-      }else if(response.status === 400){
+      } else if (response.status === 400) {
         setError('Username and password are required');
-      } 
+      }
     } catch (err) {
       setError(err.message || 'Login failed. Please try again.');
     } finally {
@@ -74,11 +74,7 @@ const Login = ({ onLogin }) => {
             />
           </div>
           {error && <div className="error-message">{error}</div>}
-          <button 
-            type="submit" 
-            className="login-button"
-            disabled={loading}
-          >
+          <button type="submit" className="login-button" disabled={loading}>
             {loading ? 'Logging in...' : 'Login'}
           </button>
         </form>
@@ -87,4 +83,4 @@ const Login = ({ onLogin }) => {
   );
 };
 
-export default Login; 
+export default Login;

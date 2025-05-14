@@ -3,11 +3,11 @@ const API_BASE_URL = 'http://localhost:5000/api';
 
 const getHeaders = () => {
   return {
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
   };
 };
 
-const handleResponse = async (response) => {
+const handleResponse = async response => {
   if (!response.ok) {
     const error = await response.json();
     throw new Error(error.error || 'Something went wrong');
@@ -21,7 +21,7 @@ const api = {
       const response = await fetch(`${API_BASE_URL}/auth/login`, {
         method: 'POST',
         headers: getHeaders(),
-        body: JSON.stringify({ username, password })
+        body: JSON.stringify({ username, password }),
       });
       return handleResponse(response);
     } catch (error) {
@@ -33,20 +33,7 @@ const api = {
     try {
       const response = await fetch(`${API_BASE_URL}/students`, {
         method: 'GET',
-        headers: getHeaders()
-      });
-      return handleResponse(response);
-    } catch (error) {
-      throw new Error(error.message || 'Failed to fetch students');
-    }
-  },
-
-  getStudentsRegisterOrVaccinated: async (vaccineName) =>{
-    try {
-      const response = await fetch(`${API_BASE_URL}/registeredVaccinatedStudents`, {
-        method: 'POST',
         headers: getHeaders(),
-        body: JSON.stringify({ vaccineName })
       });
       return handleResponse(response);
     } catch (error) {
@@ -54,12 +41,28 @@ const api = {
     }
   },
 
-  addStudent: async (studentData) => {
+  getStudentsRegisterOrVaccinated: async vaccineName => {
+    try {
+      const response = await fetch(
+        `${API_BASE_URL}/registeredVaccinatedStudents`,
+        {
+          method: 'POST',
+          headers: getHeaders(),
+          body: JSON.stringify({ vaccineName }),
+        }
+      );
+      return handleResponse(response);
+    } catch (error) {
+      throw new Error(error.message || 'Failed to fetch students');
+    }
+  },
+
+  addStudent: async studentData => {
     try {
       const response = await fetch(`${API_BASE_URL}/students`, {
         method: 'POST',
         headers: getHeaders(),
-        body: JSON.stringify(studentData)
+        body: JSON.stringify(studentData),
       });
       return handleResponse(response);
     } catch (error) {
@@ -72,7 +75,7 @@ const api = {
       const response = await fetch(`${API_BASE_URL}/students/${id}`, {
         method: 'PUT',
         headers: getHeaders(),
-        body: JSON.stringify(studentData)
+        body: JSON.stringify(studentData),
       });
       return handleResponse(response);
     } catch (error) {
@@ -80,11 +83,11 @@ const api = {
     }
   },
 
-  deleteStudent: async (id) => {
+  deleteStudent: async id => {
     try {
       const response = await fetch(`${API_BASE_URL}/students/${id}`, {
         method: 'DELETE',
-        headers: getHeaders()
+        headers: getHeaders(),
       });
       return handleResponse(response);
     } catch (error) {
@@ -92,12 +95,12 @@ const api = {
     }
   },
 
-  getRegisteredStudentsForVaccine: async (vaccineName) => {
+  getRegisteredStudentsForVaccine: async vaccineName => {
     try {
       const response = await fetch(`${API_BASE_URL}/registeredStudents`, {
         method: 'POST',
         headers: getHeaders(),
-        body: JSON.stringify({ vaccineName })
+        body: JSON.stringify({ vaccineName }),
       });
       return handleResponse(response);
     } catch (error) {
@@ -105,30 +108,43 @@ const api = {
     }
   },
 
-  getVaccinatedStudentsForVaccine: async (vaccineName) => {
+  getVaccinatedStudentsForVaccine: async vaccineName => {
     try {
       const response = await fetch(`${API_BASE_URL}/vaccinatedStudents`, {
         method: 'POST',
         headers: getHeaders(),
-        body: JSON.stringify({ vaccineName })
+        body: JSON.stringify({ vaccineName }),
       });
       return handleResponse(response);
     } catch (error) {
       throw new Error(error.message || 'Failed to fetch vaccinated students');
     }
   },
-  
+
   getVaccines: async () => {
     try {
       const response = await fetch(`${API_BASE_URL}/vaccines`, {
         method: 'GET',
-        headers: getHeaders()
+        headers: getHeaders(),
       });
       return handleResponse(response);
     } catch (error) {
       throw new Error(error.message || 'Failed to fetch vaccines');
     }
-  }
+  },
+
+  addVaccinationDrive: async (driveData) => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/drive`, {
+        method: 'POST',
+        headers: getHeaders(),
+        body: JSON.stringify(driveData),
+      });
+      return handleResponse(response);
+    } catch (error) {
+      throw new Error(error.message || 'Failed to fetch vaccines');
+    }
+  },
 };
 
-export default api; 
+export default api;
